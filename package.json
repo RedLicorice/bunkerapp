@@ -7,7 +7,10 @@
     "lint": "turbo run lint",
     "type-check": "turbo run type-check",
     "db:start": "supabase start",
-    "db:migrate": "supabase db push"
+    "db:migrate": "supabase db push",
+    "db:seed:users": "node --env-file=.env.local scripts/seed-users.mjs",
+    "db:seed:data": "node --env-file=.env.local scripts/seed-data.mjs",
+    "db:seed": "pnpm db:seed:users && pnpm db:seed:data"
   },
   "devDependencies": {
     "supabase": "^1.200.3",
