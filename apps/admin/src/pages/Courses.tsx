@@ -164,7 +164,7 @@ function CourseModal({ course, onSave, onClose, saving }: {
   )
 }
 
-function LessonModal({ lesson, courseId, onSave, onClose, saving }: {
+function LessonModal({ lesson, courseId: _courseId, onSave, onClose, saving }: {
   lesson: Partial<Lesson>; courseId: string; onSave: (l: Partial<Lesson>) => void; onClose: () => void; saving: boolean
 }) {
   const [form, setForm] = useState({
