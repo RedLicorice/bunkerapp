@@ -1,0 +1,21 @@
+supabase postgres psw zQgM7rwjPC6M816j
+url https://ezqdmjijhgrmmofmyqho.supabase.co
+anonkey sb_publishable_iWAnZl_rpMQEpXUNzys27g_J15EPt8E
+direct postgresql://postgres:[YOUR-PASSWORD]@db.ezqdmjijhgrmmofmyqho.supabase.co:5432/postgres
+supabase cli:
+supabase login
+supabase init
+supabase link --project-ref ezqdmjijhgrmmofmyqho
+
+                                                                                                                  
+  1. Install deps                                                                                                  
+  cd ~/repos/bunkerapp && pnpm install                                                                             
+                                                                                                                   
+  2. Create env files (same content in both apps)                                                                  
+  cp .env.example apps/customer/.env.local                                                                         
+  cp .env.example apps/admin/.env.local                                                                            
+  Then fill in real VITE_SUPABASE_URL + VITE_SUPABASE_ANON_KEY. If using local Supabase: ! supabase start first to 
+  get those values.                                                                                                
+                                                                                                                   
+  3. Start dev servers                                                                                             
+  pnpm dev                                                                              

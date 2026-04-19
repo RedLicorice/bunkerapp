@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body { overscroll-behavior: none; }
+}
+
+@layer utilities {
+  .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+  .safe-top    { padding-top:    env(safe-area-inset-top); }
+}
