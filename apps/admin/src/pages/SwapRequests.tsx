@@ -27,22 +27,31 @@ export default function SwapRequests() {
     enabled:  tab === 'all',
   })
 
+  const [actionError, setActionError] = useState<string | null>(null)
+
   const approve = useMutation({
     mutationFn: (id: string) => approveSwap(id, profile!.id),
     onSuccess: () => {
+      setActionError(null)
       qc.invalidateQueries({ queryKey: ['swap-requests-pending'] })
       qc.invalidateQueries({ queryKey: ['swap-requests-all'] })
     },
+    onError: (err: any) => setActionError(err?.message ?? 'Failed to approve swap'),
   })
 
   const reject = useMutation({
     mutationFn: ({ id, note }: { id: string; note: string }) =>
       rejectSwap(id, profile!.id, note || undefined),
     onSuccess: () => {
+      setActionError(null)
       qc.invalidateQueries({ queryKey: ['swap-requests-pending'] })
       qc.invalidateQueries({ queryKey: ['swap-requests-all'] })
       setRejectModal(null)
       setRejectNote('')
+    },
+    onError: (err: any) => {
+      setRejectModal(null)
+      setActionError(err?.message ?? 'Failed to reject swap')
     },
   })
 
@@ -58,6 +67,13 @@ export default function SwapRequests() {
           : undefined
       }
     >
+      {actionError && (
+        <div className="mb-4 rounded-xl bg-red-950/60 px-4 py-3 text-sm text-red-400 flex justify-between items-center">
+          <span>{actionError}</span>
+          <button onClick={() => setActionError(null)} className="ml-3 text-red-500 hover:text-red-300">✕</button>
+        </div>
+      )}
+
       {/* Tabs */}
       <div className="mb-6 flex gap-1 rounded-xl bg-zinc-900 p-1">
         {(['pending', 'all'] as TabKey[]).map((t) => (
